@@ -17,12 +17,18 @@ const geocodeURL =
   "https://api.mapbox.com/geocoding/v5/mapbox.places/-73.989,40.733.json?access_token=pk.eyJ1IjoiYWJoaTA0MTAiLCJhIjoiY2p5cXFwenV3MDFwZjNibjJtODZha2FqMyJ9.lYXeofeFQnqZi8IhUgac9A&limit=1";
 
 request({ url: geocodeURL, json: true }, (error, response) => {
-  console.log(
-    "The latitude and Longitude of Los Angeles is : ",
-    // response.features[0].center[0]
-    response.body.features[0].center[0],
-    "and ",
-    response.body.features[0].center[1],
-    "respectively"
-  );
+  if (error) {
+    console.log("Unable to connect to location services");
+  } else if (response.body.features.length === 0) {
+    console.log("Unable to find location. Try another search");
+  } else {
+    console.log(
+      "The latitude and Longitude of Los Angeles is : ",
+      // response.features[0].center[0]
+      response.body.features[0].center[0],
+      "and ",
+      response.body.features[0].center[1],
+      "respectively"
+    );
+  }
 });
