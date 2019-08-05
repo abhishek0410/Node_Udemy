@@ -6,16 +6,15 @@ const forecast = (latitude, longitude, callback) => {
     latitude +
     "," +
     longitude;
-  request({ url: url, json: true }, (error, response) => {
+  request({ url: url, json: true }, (error, { body }) => {
     if (error) {
       callback("Unable to connect to location services !", undefined);
-    } else if (response.body.error) {
+    } else if (body.error) {
       callback("Unable to find the location ", undefined);
     } else {
       callback(
         undefined,
-        "The chances for rain are : " +
-          response.body.currently.precipProbability
+        "The chances for rain are : " + body.currently.precipProbability
       );
     }
   });
