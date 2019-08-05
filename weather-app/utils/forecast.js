@@ -12,7 +12,11 @@ const forecast = (latitude, longitude, callback) => {
     } else if (response.body.error) {
       callback("Unable to find the location ", undefined);
     } else {
-      callback(undefined, response);
+      callback(
+        undefined,
+        "The chances for rain are : " +
+          response.body.currently.precipProbability
+      );
     }
   });
 };
