@@ -45,26 +45,42 @@ app.get("/", (req, res) => {
 });
 
 //Sending JSON
-app.get("/help", (req, res) => {
-  res.send(
-    {
-      name: "Andrew"
-    },
-    {
-      name: "Sarah"
-    }
-  );
-});
+// app.get("/help", (req, res) => {
+//   res.send(
+//     {
+//       name: "Andrew"
+//     },
+//     {
+//       name: "Sarah"
+//     }
+//   );
+// });
 
 //Sendign HTML
-app.get("/about", (req, res) => {
-  res.send("<h1>Everything About the page here</h1>");
+// app.get("/about", (req, res) => {
+//   res.send("<h1>Everything About the page here</h1>");
+// });
+
+// app.get("/weather", (req, res) => {
+//   res.send({
+//     forecast: "It is snowing",
+//     location: "Philadelphia"
+//   });
+// });
+
+app.get("/help/*", (req, res) => {
+  res.render("404", {
+    title: "404",
+    name: "Abhishek",
+    errorMessage: "Help Article  Not Found"
+  });
 });
 
-app.get("/weather", (req, res) => {
-  res.send({
-    forecast: "It is snowing",
-    location: "Philadelphia"
+app.get("*", (req, res) => {
+  res.render("404", {
+    title: "404",
+    name: "Abhishek",
+    errorMessage: "Page Not Found"
   });
 });
 //app.com
