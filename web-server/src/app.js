@@ -70,22 +70,27 @@ app.get("/weather", (req, res) => {
     });
   }
   // address: req.query.address
-  geocode(req.query.address, (error, { latitude, longitude, location }) => {
-    if (error) {
-      return res.send({ error: "There has been error in fetching the data" });
-    }
-
-    forecast(latitude, longitude, (error, forecastData) => {
+  geocode(
+    req.query.address,
+    (error, { latitude, longitude, location } = {}) => {
       if (error) {
-        return res.send({ error: "There has been error in fetching the data" });
+        return res.send({ error: "There has been error in the geocode block" });
       }
-      res.send({
-        forecast: forecastData,
-        location: location,
-        address: req.query.address
+
+      forecast(latitude, longitude, (error, forecastData) => {
+        if (error) {
+          return res.send({
+            error: "There has been error in forecast block"
+          });
+        }
+        res.send({
+          forecast: forecastData,
+          location: location,
+          address: req.query.address
+        });
       });
-    });
-  });
+    }
+  );
 });
 
 app.get("/products", (req, res) => {
