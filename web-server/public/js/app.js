@@ -6,7 +6,7 @@ fetch("http://puzzle.mead.io/puzzle").then(response => {
   });
 });
 
-fetch("http://localhost:8000/weather?address=boston").then(response => {
+fetch("http://localhost:8000/weather?address=toronto").then(response => {
   response.json().then(data => {
     if (data.error) {
       console.log(data.error);
@@ -15,4 +15,11 @@ fetch("http://localhost:8000/weather?address=boston").then(response => {
       console.log(data.forecast);
     }
   });
+});
+
+const weathreForm = document.querySelector("form");
+
+weathreForm.addEventListener("submit", e => {
+  e.preventDefault();
+  console.log("testing");
 });
