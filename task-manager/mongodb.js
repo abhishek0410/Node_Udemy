@@ -1,9 +1,13 @@
 const mongodb = require("mongodb");
 const MongoClient = mongodb.MongoClient;
+const ObjectID = mongodb.ObjectID;
 
 const connectionURL = "mongodb://127.0.0.1:27017";
 const databaseName = "task-manager";
 
+const id = new ObjectID();
+console.log(id);
+console.log(id.getTimestamp());
 MongoClient.connect(
   connectionURL,
   { useNewUrlParser: true },
@@ -44,27 +48,27 @@ MongoClient.connect(
     // );
 
     //Creating a task collection in the task-manager database
-    db.collection("task").insertMany(
-      [
-        {
-          description: "Clean your desk ",
-          completed: false
-        },
-        {
-          description: "Greatness lies within",
-          completed: true
-        },
-        {
-          description: "By gones are bygones",
-          completed: true
-        }
-      ],
-      (error, result) => {
-        if (error) {
-          return console.log("The data could");
-        }
-        console.log(result.ops);
-      }
-    );
+    // db.collection("task").insertMany(
+    //   [
+    //     {
+    //       description: "Clean your desk ",
+    //       completed: false
+    //     },
+    //     {
+    //       description: "Greatness lies within",
+    //       completed: true
+    //     },
+    //     {
+    //       description: "By gones are bygones",
+    //       completed: true
+    //     }
+    //   ],
+    //   (error, result) => {
+    //     if (error) {
+    //       return console.log("The data could");
+    //     }
+    //     console.log(result.ops);
+    //   }
+    // );
   }
 );
