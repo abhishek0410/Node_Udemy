@@ -5,9 +5,6 @@ const ObjectID = mongodb.ObjectID;
 const connectionURL = "mongodb://127.0.0.1:27017";
 const databaseName = "task-manager";
 
-const id = new ObjectID();
-console.log(id);
-console.log(id.getTimestamp());
 MongoClient.connect(
   connectionURL,
   { useNewUrlParser: true },
@@ -16,59 +13,37 @@ MongoClient.connect(
       return console.log("Unable to connect to the database");
     }
     const db = client.db(databaseName);
-    // db.collection("users").insertOne(
-    //   {
-    //     name: "Abhi",
-    //     age: 27
-    //   },
-    //   (error, result) => {
-    //     if (error) {
-    //       return console.log("Unable to insert user ");
-    //     }
-    //     console.log(result.ops);
-    //   }
-    // );
-    // db.collection("users").insertMany(
-    //   [
-    //     {
-    //       name: "Jen",
-    //       age: 28
-    //     },
-    //     {
-    //       name: "Gunther",
-    //       age: 27
-    //     }
-    //   ],
-    //   (error, result) => {
-    //     if (error) {
-    //       return console.log("Unable to insert Document");
-    //     }
-    //     console.log(result.ops);
-    //   }
-    // );
 
-    //Creating a task collection in the task-manager database
-    // db.collection("task").insertMany(
-    //   [
-    //     {
-    //       description: "Clean your desk ",
-    //       completed: false
-    //     },
-    //     {
-    //       description: "Greatness lies within",
-    //       completed: true
-    //     },
-    //     {
-    //       description: "By gones are bygones",
-    //       completed: true
-    //     }
-    //   ],
+    // db.collection("users").findOne(
+    //   { _id: new ObjectID("5d53a3064005761714310d35") },
     //   (error, result) => {
     //     if (error) {
-    //       return console.log("The data could");
+    //       return console.log("Unable to fetch");
     //     }
-    //     console.log(result.ops);
+    //     console.log(result);
     //   }
     // );
+    // db.collection("users")
+    //   .find({ age: 27 })
+    //   .toArray((error, users) => {
+    //     console.log(users);
+    //   });
+
+    //Finding the document from the task collection
+    db.collection("task").findOne(
+      { _id: new ObjectID("5d53a4de181ae52f68e7aed2") },
+      (error, result) => {
+        if (error) {
+          return console.log("There was an error fetching the data");
+        }
+        console.log(result);
+      }
+    );
+
+    db.collection("task")
+      .find({ completed: false })
+      .toArray((error, users) => {
+        console.log(users);
+      });
   }
 );
