@@ -15,40 +15,25 @@ MongoClient.connect(
     const db = client.db(databaseName);
 
     // db.collection("users")
-    //   .updateOne(
-    //     {
-    //       _id: new ObjectID("5d53a3064005761714310d37")
-    //     },
-    //     {
-    //       $set: {
-    //         name: "New Changed name"
-    //       }
-    //     }
-    //   )
+    //   .deleteMany({
+    //     age: 27
+    //   })
     //   .then(result => {
-    //     console.log("Promise returned the following ", result);
+    //     console.log("Result is ", result);
     //   })
     //   .catch(error => {
-    //     console.log("Promise not fullfilled , we have got an error");
+    //     console.log("Error is ", error);
     //   });
 
-    //Challenge Task :
     db.collection("task")
-      .updateMany(
-        {
-          completed: false
-        },
-        {
-          $set: {
-            completed: true
-          }
-        }
-      )
+      .deleteOne({
+        description: "Clean your desk "
+      })
       .then(result => {
-        console.log("The results are  ", result);
+        console.log("Result is ", result);
       })
       .catch(error => {
-        console.log("The error is ", error);
+        console.log("Error is ", error);
       });
   }
 );
