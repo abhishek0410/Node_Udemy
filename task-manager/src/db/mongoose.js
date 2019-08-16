@@ -31,40 +31,54 @@ const User = mongoose.model("User", {
         throw new Error("Age must be a positive number");
       }
     }
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 7,
+    trim: true,
+    validate(value) {
+      if (valuetoLoerCase().inludes("password")) {
+        throw new Error("Password must not contain the phrase password");
+      }
+    }
   }
 });
 
-const me = new User({
-  name: "delhi",
-  email: "mike@mead.io"
-});
-
-me.save()
-  .then(() => {
-    console.log(me);
-  })
-  .catch(error => {
-    console.log("Error !", error);
-  });
-
-// const Task = mongoose.model("task", {
-//   description: {
-//     type: String
-//   },
-//   completed: {
-//     type: Boolean
-//   }
+// const me = new User({
+//   name: "delhi2",
+//   email: "delhi2@mead.io",
+//   password: "  re32"
 // });
 
-// const task1 = new Task({
-//   description: "What is the edge of universe",
-//   completed: true
-// });
-// task1
-//   .save()
-//   .then(result => {
-//     console.log(result);
+// me.save()
+//   .then(() => {
+//     console.log(me);
 //   })
 //   .catch(error => {
-//     console.log("Error is ", error);
+//     console.log("Error !", error);
 //   });
+
+const Task = mongoose.model("task", {
+  description: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  completed: {
+    type: Boolean,
+    default: false
+  }
+});
+
+const task1 = new Task({
+  description: "toone mere jana"
+});
+task1
+  .save()
+  .then(result => {
+    console.log(result);
+  })
+  .catch(error => {
+    console.log("Error is ", error);
+  });
