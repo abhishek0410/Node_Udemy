@@ -14,36 +14,41 @@ MongoClient.connect(
     }
     const db = client.db(databaseName);
 
-    // db.collection("users").findOne(
-    //   { _id: new ObjectID("5d53a3064005761714310d35") },
-    //   (error, result) => {
-    //     if (error) {
-    //       return console.log("Unable to fetch");
-    //     }
-    //     console.log(result);
-    //   }
-    // );
     // db.collection("users")
-    //   .find({ age: 27 })
-    //   .toArray((error, users) => {
-    //     console.log(users);
+    //   .updateOne(
+    //     {
+    //       _id: new ObjectID("5d53a3064005761714310d37")
+    //     },
+    //     {
+    //       $set: {
+    //         name: "New Changed name"
+    //       }
+    //     }
+    //   )
+    //   .then(result => {
+    //     console.log("Promise returned the following ", result);
+    //   })
+    //   .catch(error => {
+    //     console.log("Promise not fullfilled , we have got an error");
     //   });
 
-    //Finding the document from the task collection
-    db.collection("task").findOne(
-      { _id: new ObjectID("5d53a4de181ae52f68e7aed2") },
-      (error, result) => {
-        if (error) {
-          return console.log("There was an error fetching the data");
-        }
-        console.log(result);
-      }
-    );
-
+    //Challenge Task :
     db.collection("task")
-      .find({ completed: false })
-      .toArray((error, users) => {
-        console.log(users);
+      .updateMany(
+        {
+          completed: false
+        },
+        {
+          $set: {
+            completed: true
+          }
+        }
+      )
+      .then(result => {
+        console.log("The results are  ", result);
+      })
+      .catch(error => {
+        console.log("The error is ", error);
       });
   }
 );
